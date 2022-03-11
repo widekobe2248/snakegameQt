@@ -10,13 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    snakegame.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    snakegame.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    snakegame.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
