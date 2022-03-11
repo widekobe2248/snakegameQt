@@ -1,1 +1,29 @@
-Test
+PLAN (Kobe's Idea):
+
+Create a Scene that inherits two scene objects Head and Body items
+
+Each head will hold an array or list or the game will be a 2d array for each section
+
+The head will store the current direction and the input keys will change how the head changes
+direction. 
+
+It will also store the score. The body items will only hold the direction it will 
+travel which will dictate the movement
+
+When the head moves it will transfer that direction down the body and move and update its 
+direction
+
+When a head moves and eats a berry it will replace the previous head position with a body
+that holds its direction 
+
+When contact with an end of game material such as other player or body object will cause 
+everything to stop.
+
+
+Based on the settings passed from the first menu like player count and game speed will
+change the intizalization of the game
+
+
+//TODO's
+Develop method of generating berries (to not overlap other body parts)
+Create everything
