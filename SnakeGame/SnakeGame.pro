@@ -11,11 +11,13 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    snakegame.cpp
+    snakegame.cpp \
+    snakehead.cpp
 
 HEADERS += \
     mainwindow.h \
-    snakegame.h
+    snakegame.h \
+    snakehead.h
 
 FORMS += \
     mainwindow.ui \

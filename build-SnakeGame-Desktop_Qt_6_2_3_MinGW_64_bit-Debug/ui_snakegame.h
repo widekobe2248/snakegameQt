@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLabel>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -23,8 +23,7 @@ class Ui_SnakeGame
 {
 public:
     QWidget *centralwidget;
-    QLabel *label;
-    QLabel *label_2;
+    QGraphicsView *graphicsView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -35,12 +34,9 @@ public:
         SnakeGame->resize(800, 600);
         centralwidget = new QWidget(SnakeGame);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(110, 110, 63, 20));
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(120, 170, 63, 20));
+        graphicsView = new QGraphicsView(centralwidget);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setGeometry(QRect(10, 10, 771, 541));
         SnakeGame->setCentralWidget(centralwidget);
         menubar = new QMenuBar(SnakeGame);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -58,8 +54,6 @@ public:
     void retranslateUi(QMainWindow *SnakeGame)
     {
         SnakeGame->setWindowTitle(QCoreApplication::translate("SnakeGame", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("SnakeGame", "TextLabel", nullptr));
-        label_2->setText(QCoreApplication::translate("SnakeGame", "TextLabel", nullptr));
     } // retranslateUi
 
 };
