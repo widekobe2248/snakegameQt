@@ -13,10 +13,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//TODO
+//Read the settings and parse the interface
 
 void MainWindow::on_pushButton_clicked()
 {
    hide();
+   //Starts the game window with settings in the constructors
    SnakeGame *w = new SnakeGame(1,2,this);
    w->show();
 

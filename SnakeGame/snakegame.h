@@ -21,7 +21,6 @@ public:
     SnakeHead *player2;
 protected:
     void showEvent(QShowEvent *event);
-    void timerEvent(QTimerEvent *event);
 
 public slots:
     void StopGame();
