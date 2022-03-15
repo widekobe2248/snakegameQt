@@ -153,7 +153,7 @@ void SnakeHead::newBerry()
         qDebug() << x_pos;
         qDebug() << y_pos;
         qDebug() << scene()->itemAt(x_pos, y_pos, QTransform());
-
+        //See if spot is empty andif not keep running
 
         Berry *newBerry = new Berry(x_pos,y_pos);
         scene()->addItem(newBerry);

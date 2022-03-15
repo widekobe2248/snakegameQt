@@ -90,6 +90,7 @@ void SnakeGame::keyPressEvent(QKeyEvent *event)
 
     //Pressed Space starts the game
     //Could easily set it to one of the input keys and just have a boolean we can set and check
+    //Need to TURN OFF AFTER FIRST START
     if(event->key() == Qt::Key_Space){
         timer = new QTimer(this);
 
@@ -102,7 +103,7 @@ void SnakeGame::keyPressEvent(QKeyEvent *event)
 
         //Effects speed need to compare it to settings
         //Lower means faster
-        timer->start(250);
+        timer->start(25);
     }
 
 }
