@@ -6,6 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setStyleSheet("background-color: white;");
+    QPalette pal = ui->pushButton->palette();
+    pal.setColor(QPalette::Button, QColor(Qt::blue));
+    ui->pushButton->setAutoFillBackground(true);
+    ui->pushButton->setPalette(pal);
+    ui->pushButton->update();
 }
 
 MainWindow::~MainWindow()
@@ -25,3 +31,28 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
+
+void MainWindow::on_radioButton_clicked()
+{
+
+}
+
+void MainWindow::on_radioButton_2_clicked()
+{
+
+}
+
+void MainWindow::on_radioButton_3_clicked()
+{
+
+}
+
+void MainWindow::on_radioButton_4_clicked()
+{
+
+}
+
+void MainWindow::on_radioButton_5_clicked()
+{
+
+}
