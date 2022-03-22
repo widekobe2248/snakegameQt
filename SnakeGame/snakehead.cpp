@@ -5,10 +5,13 @@ SnakeHead::SnakeHead() : QGraphicsItem()
     direction = 1;
     speed = 10;
     crashed = false;
+    srand(time(NULL));
 
+    int srandx = rand() % (70);
+    int srandy = rand() % (40);
 
-    int StartX = 200;
-    int StartY = 200;
+    int StartX = srandx * 10;
+    int StartY = srandy * 10;
 
     setPos(mapToParent(StartX,StartY));
 
@@ -77,11 +80,11 @@ void SnakeHead::advance(int phase)
         QPointF point = mapToParent(-(boundingRect().width()-10), -(boundingRect().width()-10));
         QPointF point2 = mapToParent((boundingRect().width()), (boundingRect().width()));
         if(!scene()->sceneRect().contains(point2)) {
-            qDebug() << "OUTSIDE OF BOX NOW";
+
             crashed = true;
         }
         if(!scene()->sceneRect().contains(point)) {
-            qDebug() << "OUTSIDE OF BOX NOW";
+
             crashed = true;
         }
 
@@ -95,6 +98,7 @@ void SnakeHead::advance(int phase)
             }
 
             if (berry) {
+                score += 1;
                 //Berry Pickup
                 addBody(prevPos);
                 scene()->removeItem(berry);
@@ -150,9 +154,7 @@ void SnakeHead::newBerry()
         int x_pos = rand_x * 10;
         int y_pos = rand_y * 10;
 
-        qDebug() << x_pos;
-        qDebug() << y_pos;
-        qDebug() << scene()->itemAt(x_pos, y_pos, QTransform());
+
         //See if spot is empty andif not keep running
 
         Berry *newBerry = new Berry(x_pos,y_pos);
@@ -170,5 +172,7 @@ int SnakeHead::getDir()
 {
     return direction;
 }
+
+
 
 

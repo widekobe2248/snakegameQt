@@ -16,8 +16,20 @@ SnakeGame::~SnakeGame()
     delete ui;
 }
 
+
 //Initalizes the game
 void SnakeGame::showEvent(QShowEvent *event) {
+    //randomize starting positions
+    srand(time(NULL));
+    int srandx1 = rand() % (70);
+    int srandy1 = rand() % (40);
+    int StartX1 = srandx1 * 10;
+    int StartY1 = srandy1 * 10;
+    int srandx2 = rand() % (70);
+    int srandy2 = rand() % (40);
+    int StartX2 = srandx2 *10;
+    int StartY2 = srandy2 *10;
+
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
@@ -43,10 +55,10 @@ void SnakeGame::showEvent(QShowEvent *event) {
 
 
     //Randomize berry spots to start and potentially have setting for different amount in play at once
-    Berry *berry = new Berry(100,100);
+    Berry *berry = new Berry(StartX1,StartY1);
     scene->addItem(berry);
 
-    Berry *berry2 = new Berry(400,200);
+    Berry *berry2 = new Berry(StartX2,StartY2);
     scene->addItem(berry2);
 
 
@@ -100,6 +112,9 @@ void SnakeGame::keyPressEvent(QKeyEvent *event)
         //Checks the stopGame condition every iteration
         connect(timer, SIGNAL(timeout()), this, SLOT(StopGame()));
 
+        connect(timer, SIGNAL(timeout()), this, SLOT(trackScore()));
+
+
 
         //Effects speed need to compare it to settings
         //Lower means faster
@@ -108,3 +123,10 @@ void SnakeGame::keyPressEvent(QKeyEvent *event)
 
 }
 
+int SnakeGame::trackScore()
+{
+    QString baseTxt1 = "Player 1 Score: ";
+    QString score1 = QString::number(player1->score);
+    ui->label->setText(baseTxt1 + score1);
+    return 0;
+}

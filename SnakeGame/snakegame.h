@@ -24,6 +24,7 @@ protected:
 
 public slots:
     void StopGame();
+    int trackScore();
 private:
     int players;
     int speed;
@@ -31,6 +32,7 @@ private:
     QGraphicsScene *scene;
     QTimer *timer;
     void keyPressEvent(QKeyEvent *event);
+
 };
 
 #endif // SNAKEGAME_H

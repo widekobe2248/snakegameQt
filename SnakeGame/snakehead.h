@@ -23,8 +23,9 @@ public:
         scene()->addItem(newBody);
         body.insert(0,newBody);
         //body.append(newBody);
-        qDebug() << body;
+
     }
+    int score = 0;
     int getDir();
     bool getColl();
     bool crashed;
