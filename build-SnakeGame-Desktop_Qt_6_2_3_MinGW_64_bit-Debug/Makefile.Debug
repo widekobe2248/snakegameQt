@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra -fexceptions
 INCPATH       = -I../SnakeGame -I. -IC:/Qt/6.2.3/mingw_64/include -IC:/Qt/6.2.3/mingw_64/include/QtWidgets -IC:/Qt/6.2.3/mingw_64/include/QtGui -IC:/Qt/6.2.3/mingw_64/include/QtCore -Idebug -I. -I/include -IC:/Qt/6.2.3/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\6.2.3\mingw_64\lib\libQt6Widgets.a C:\Qt\6.2.3\mingw_64\lib\libQt6Gui.a C:\Qt\6.2.3\mingw_64\lib\libQt6Core.a -lmingw32 C:\Qt\6.2.3\mingw_64\lib\libQt6EntryPoint.a -lshell32  
+LIBS        =        C:\Qt\6.2.3\mingw_64\lib\libQt6Widgets.a C:\Qt\6.2.3\mingw_64\lib\libQt6Gui.a C:\Qt\6.2.3\mingw_64\lib\libQt6Core.a debug\SnakeGame_resource_res.o -lmingw32 C:\Qt\6.2.3\mingw_64\lib\libQt6EntryPoint.a -lshell32  
 QMAKE         = C:\Qt\6.2.3\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\SnakeGame_resource_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -86,8 +86,11 @@ DESTDIR_TARGET = debug\SnakeGame.exe
 first: all
 all: Makefile.Debug  debug/SnakeGame.exe
 
-debug/SnakeGame.exe: C:/Qt/6.2.3/mingw_64/lib/libQt6Widgets.a C:/Qt/6.2.3/mingw_64/lib/libQt6Gui.a C:/Qt/6.2.3/mingw_64/lib/libQt6Core.a C:/Qt/6.2.3/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h ui_snakegame.h $(OBJECTS) 
+debug/SnakeGame.exe: C:/Qt/6.2.3/mingw_64/lib/libQt6Widgets.a C:/Qt/6.2.3/mingw_64/lib/libQt6Gui.a C:/Qt/6.2.3/mingw_64/lib/libQt6Core.a C:/Qt/6.2.3/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h ui_snakegame.h $(OBJECTS) debug/SnakeGame_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+
+debug/SnakeGame_resource_res.o: SnakeGame_resource.rc
+	windres -i SnakeGame_resource.rc -o debug\SnakeGame_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\SnakeGame\SnakeGame.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -99,6 +102,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\berry.o debug\main.o debug\mainwindow.o debug\snakebody.o debug\snakegame.o debug\snakehead.o debug\moc_mainwindow.o debug\moc_snakegame.o
+	-$(DEL_FILE) debug\SnakeGame_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -612,6 +616,10 @@ debug/moc_snakegame.cpp: ../SnakeGame/snakegame.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QGraphicsItem \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		../SnakeGame/snakebody.h \
+		../SnakeGame/berry.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qdialog.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.3/mingw_64/bin/moc.exe
 	C:\Qt\6.2.3\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/kobej/Desktop/C++/Snake/snakegameQt/build-SnakeGame-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.2.3/mingw_64/mkspecs/win32-g++ -IC:/Users/kobej/Desktop/C++/Snake/snakegameQt/SnakeGame -IC:/Qt/6.2.3/mingw_64/include -IC:/Qt/6.2.3/mingw_64/include/QtWidgets -IC:/Qt/6.2.3/mingw_64/include/QtGui -IC:/Qt/6.2.3/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\SnakeGame\snakegame.h -o debug\moc_snakegame.cpp
@@ -1061,6 +1069,8 @@ debug/mainwindow.o: ../SnakeGame/mainwindow.cpp ../SnakeGame/mainwindow.h \
 		C:/Qt/6.2.3/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.2.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.2.3/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QFrame \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qlayout.h \
@@ -1068,7 +1078,6 @@ debug/mainwindow.o: ../SnakeGame/mainwindow.cpp ../SnakeGame/mainwindow.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QLabel \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.2.3/mingw_64/include/QtGui/qpicture.h \
 		C:/Qt/6.2.3/mingw_64/include/QtGui/qtextdocument.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QMenuBar \
@@ -1284,7 +1293,11 @@ debug/mainwindow.o: ../SnakeGame/mainwindow.cpp ../SnakeGame/mainwindow.h \
 		C:/Qt/6.2.3/mingw_64/include/QtGui/QPainter \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QGraphicsItem \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
-		../SnakeGame/snakebody.h
+		../SnakeGame/snakebody.h \
+		../SnakeGame/berry.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\SnakeGame\mainwindow.cpp
 
 debug/snakebody.o: ../SnakeGame/snakebody.cpp ../SnakeGame/snakebody.h \
@@ -1753,6 +1766,10 @@ debug/snakegame.o: ../SnakeGame/snakegame.cpp ../SnakeGame/snakegame.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QGraphicsItem \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		../SnakeGame/snakebody.h \
+		../SnakeGame/berry.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qdialog.h \
 		ui_snakegame.h \
 		C:/Qt/6.2.3/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QApplication \
@@ -1762,13 +1779,14 @@ debug/snakegame.o: ../SnakeGame/snakegame.cpp ../SnakeGame/snakegame.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qscrollarea.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qlabel.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QMenuBar \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qmenubar.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qmenu.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QStatusBar \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qstatusbar.h \
-		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QWidget \
-		../SnakeGame/berry.h
+		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\snakegame.o ..\SnakeGame\snakegame.cpp
 
 debug/snakehead.o: ../SnakeGame/snakehead.cpp ../SnakeGame/snakehead.h \
@@ -1883,7 +1901,8 @@ debug/snakehead.o: ../SnakeGame/snakehead.cpp ../SnakeGame/snakehead.h \
 		C:/Qt/6.2.3/mingw_64/include/QtGui/qpainterpath.h \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/QGraphicsScene \
 		C:/Qt/6.2.3/mingw_64/include/QtWidgets/qgraphicsscene.h \
-		../SnakeGame/snakebody.h
+		../SnakeGame/snakebody.h \
+		../SnakeGame/berry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\snakehead.o ..\SnakeGame\snakehead.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 
