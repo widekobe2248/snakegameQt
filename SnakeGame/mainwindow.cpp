@@ -21,7 +21,12 @@ void MainWindow::on_pushButton_clicked()
 {
    hide();
    //Starts the game window with settings in the constructors
-   SnakeGame *w = new SnakeGame(1,2,this);
+
+
+
+
+   ui->radioButton->isEnabled();
+   SnakeGame *w = new SnakeGame(player_count,speed,this);
    w->show();
 
 }
@@ -29,25 +34,25 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_radioButton_clicked()
 {
-
+    player_count = 1;
 }
 
 void MainWindow::on_radioButton_2_clicked()
 {
-
+    player_count = 2;
 }
 
 void MainWindow::on_radioButton_3_clicked()
 {
-
+    speed = 150;
 }
 
 void MainWindow::on_radioButton_4_clicked()
 {
-
+    speed = 100;
 }
 
 void MainWindow::on_radioButton_5_clicked()
 {
-
+    speed = 50;
 }

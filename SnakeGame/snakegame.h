@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <QGraphicsScene>
 #include <snakehead.h>
+#include <QMessageBox>
 namespace Ui {
 class SnakeGame;
 }
@@ -19,6 +20,8 @@ public:
     ~SnakeGame();
     SnakeHead *player1;
     SnakeHead *player2;
+    bool started = false;
+    void popUp();
 protected:
     void showEvent(QShowEvent *event);
 

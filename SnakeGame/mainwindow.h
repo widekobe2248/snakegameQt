@@ -14,6 +14,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    int speed = 100;
+    int player_count = 1;
 
 private slots:
     void on_pushButton_clicked();
